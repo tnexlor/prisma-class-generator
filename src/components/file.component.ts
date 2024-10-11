@@ -5,6 +5,7 @@ import { getRelativeTSPath, prettierFormat, writeTSFile } from '../util'
 import { PrismaClassGenerator } from '../generator'
 import { Echoable } from '../interfaces/echoable'
 import { ImportComponent } from './import.component'
+import { validateHeaderName } from 'http'
 
 export class FileComponent implements Echoable {
 	private _dir?: string
@@ -103,7 +104,8 @@ export class FileComponent implements Echoable {
 
 		if (this.prismaClass.types) {
 			this.prismaClass.types.forEach((type) => {
-				this.registerImport(type, './' + type.toLowerCase())
+				console.log(type)
+				this.registerImport(type, './' + snakeCase(type))
 			})
 		}
 
